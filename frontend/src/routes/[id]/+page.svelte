@@ -8,8 +8,16 @@
 
 	const game = $derived(await pb.collection('games').getOne(data.gameId));
 
-	let rounds: Round[] = $state((await pb.collection('rounds').getList(1, 100)).items);
+	let rounds: Round[] = $state([]);
 	$effect(() => {
+		pb.collection('rounds')
+			.getList(1, 100, {
+				filter: pb.filter('game = {:game}', { game: data.gameId })
+			})
+			.then((list) => {
+				rounds = list.items;
+			});
+
 		const unsubscribe = subscribeMultiple(
 			pb.collection('rounds'),
 			() => rounds,
@@ -19,6 +27,7 @@
 					.toSorted((a, b) => a.created.localeCompare(b.created))),
 			'*'
 		);
+
 		return () => unsubscribe();
 	});
 	const currentRound = $derived(rounds.at(-1));
@@ -48,6 +57,7 @@
 			},
 			'*'
 		);
+
 		return () => unsubscribe();
 	});
 
