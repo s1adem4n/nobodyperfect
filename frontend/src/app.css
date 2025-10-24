@@ -1,0 +1,60 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/montserrat';
+
+@layer base {
+	html {
+		scrollbar-gutter: stable;
+	}
+
+	html,
+	body {
+		@apply bg-background text-foreground;
+	}
+
+	* {
+		@apply border-border;
+	}
+}
+
+:root {
+	--background: var(--color-white);
+	--foreground: var(--color-zinc-950);
+	--primary: var(--color-zinc-950);
+	--primary-foreground: var(--color-white);
+	--secondary: var(--color-zinc-200);
+	--secondary-foreground: var(--color-zinc-950);
+	--muted: var(--color-zinc-100);
+	--muted-foreground: var(--color-zinc-500);
+	--border: var(--color-zinc-200);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--background: var(--color-zinc-950);
+		--foreground: var(--color-zinc-50);
+		--primary: var(--color-zinc-50);
+		--primary-foreground: var(--color-zinc-950);
+		--secondary: var(--color-zinc-800);
+		--secondary-foreground: var(--color-zinc-50);
+		--muted: var(--color-zinc-900);
+		--muted-foreground: var(--color-zinc-400);
+		--border: var(--color-zinc-800);
+	}
+}
+
+@theme inline {
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-border: var(--border);
+}
+
+@theme {
+	--font-sans: 'Montserrat Variable';
+	--radius: 0.5rem;
+}
