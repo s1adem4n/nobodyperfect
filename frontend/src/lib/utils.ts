@@ -1,58 +1,74 @@
 import clsx, { type ClassValue } from 'clsx';
-import type { Base } from './pb';
+import { createEffect, createResource, onCleanup } from 'solid-js';
 import type { RecordService } from 'pocketbase';
+import type { Base } from '@/lib/pb';
 
 export function cn(...inputs: ClassValue[]) {
 	return clsx(inputs);
 }
 
-export function shuffleArray<T>(array: T[]): T[] {
-	const shuffledArray = array.slice();
-	for (let i = shuffledArray.length - 1; i > 0; i--) {
-		const j = Math.floor(Math.random() * (i + 1));
-		[shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+export async function transition(action: () => Promise<unknown> | unknown) {
+	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	if (prefersReducedMotion) {
+		await action();
+		return;
 	}
-	return shuffledArray;
+
+	if (!document.startViewTransition) {
+		await action();
+		return;
+	}
+	await document.startViewTransition(action).finished;
 }
 
-export function subscribeSingle<T extends Base>(
-	service: RecordService<T>,
-	id: string,
-	setState: (state: T | null) => void
-) {
-	const unsubscribe = service.subscribe(id, (e) => {
-		switch (e.action) {
-			case 'update':
-				setState(e.record);
-				break;
-			case 'delete':
-				setState(null);
-				break;
-		}
+export function useSubscribe<T extends Base>({
+	service,
+	filter,
+	sort,
+	transform
+}: {
+	service: RecordService<T>;
+	filter?: () => string;
+	sort?: string;
+	transform?: (items: T[]) => T[];
+}) {
+	const [items, { mutate }] = createResource(filter, async (filter) => {
+		const response = await service.getList(1, 1000, {
+			filter,
+			sort
+		});
+		return transform ? transform(response.items) : response.items;
 	});
 
-	return () => unsubscribe.then((fn) => fn());
-}
+	createEffect(() => {
+		if (items() === undefined) return;
 
-export function subscribeMultiple<T extends Base>(
-	service: RecordService<T>,
-	getState: () => T[],
-	setState: (state: T[]) => void,
-	query: string
-) {
-	const unsubscribe = service.subscribe(query, (e) => {
-		switch (e.action) {
-			case 'create':
-				setState(getState().concat(e.record));
-				break;
-			case 'update':
-				setState(getState().map((r) => (r.id === e.record.id ? e.record : r)));
-				break;
-			case 'delete':
-				setState(getState().filter((r) => r.id !== e.record.id));
-				break;
-		}
+		const unsubscribe = service.subscribe('*', (e) => {
+			console.log(e);
+			switch (e.action) {
+				case 'create':
+					mutate((prev) => {
+						const next = [...(prev ?? []), e.record];
+						return transform ? transform(next) : next;
+					});
+					break;
+				case 'update':
+					mutate((prev) => {
+						const next = (prev || []).map((r) => (r.id === e.record.id ? e.record : r));
+						return transform ? transform(next) : next;
+					});
+					break;
+				case 'delete':
+					mutate((prev) => {
+						const next = (prev || []).filter((r) => r.id !== e.record.id);
+						return transform ? transform(next) : next;
+					});
+					break;
+			}
+		});
+
+		onCleanup(async () => (await unsubscribe)());
 	});
 
-	return () => unsubscribe.then((fn) => fn());
+	return items;
 }

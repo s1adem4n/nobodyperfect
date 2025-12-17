@@ -1,19 +1,18 @@
-import { sveltekit } from '@sveltejs/kit/vite';
+import { defineConfig } from 'vite';
+import solid from 'vite-plugin-solid';
 import tailwindcss from '@tailwindcss/vite';
 import icons from 'unplugin-icons/vite';
-import { defineConfig } from 'vite';
 
 export default defineConfig({
-	plugins: [
-		tailwindcss(),
-		sveltekit(),
-		icons({
-			compiler: 'svelte'
-		})
-	],
+	plugins: [solid(), tailwindcss(), icons({ compiler: 'solid' })],
+	resolve: {
+		alias: {
+			'@': '/src'
+		}
+	},
 	server: {
 		proxy: {
-			'/api': 'http://localhost:8080'
+			'/api': 'http://localhost:8090'
 		}
 	}
 });

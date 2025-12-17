@@ -11,6 +11,12 @@
 		@apply bg-background text-foreground;
 	}
 
+	html,
+	body,
+	#root {
+		height: 100%;
+	}
+
 	* {
 		@apply border-border;
 	}
@@ -23,7 +29,7 @@
 	--primary-foreground: var(--color-white);
 	--secondary: var(--color-zinc-200);
 	--secondary-foreground: var(--color-zinc-950);
-	--muted: var(--color-zinc-100);
+	--muted: var(--color-zinc-50);
 	--muted-foreground: var(--color-zinc-500);
 	--border: var(--color-zinc-200);
 }

@@ -13,7 +13,7 @@ export interface Answer extends Base {
 }
 
 export interface Game extends Base {
-	name: string;
+	code: string;
 }
 
 export interface Round extends Base {
