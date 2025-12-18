@@ -17,7 +17,7 @@ export default function Home() {
 
 			<div class="flex flex-col gap-2">
 				<label for="name" class="font-semibold">
-					Name
+					Dein Name
 				</label>
 				<Input
 					id="name"

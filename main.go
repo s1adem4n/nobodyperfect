@@ -4,6 +4,7 @@ package main
 import (
 	"io/fs"
 	"log"
+	"strings"
 	"time"
 
 	"nobodyperfect/frontend"
@@ -57,6 +58,15 @@ func main() {
 	})
 
 	app.OnServe().BindFunc(func(e *core.ServeEvent) error {
+		e.Router.Bind(apis.Gzip())
+		e.Router.BindFunc(func(e *core.RequestEvent) error {
+			if strings.HasPrefix(e.Request.URL.Path, "/assets") {
+				e.Response.Header().Set("Cache-Control", "public, max-age=31536000")
+			}
+
+			return e.Next()
+		})
+
 		subFS, err := fs.Sub(frontend.FS, "dist")
 		if err != nil {
 			return err

@@ -28,7 +28,7 @@ export default function JoinGame() {
 			<Show when={localStorage.getItem('name') === null}>
 				<div class="flex flex-col gap-2">
 					<label for="name" class="font-semibold">
-						Name
+						Dein Name
 					</label>
 					<Input
 						id="name"
