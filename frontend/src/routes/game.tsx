@@ -71,7 +71,7 @@ export default function Game() {
 
 			<Show when={currentRound()} fallback={<span>Warte auf die nächste Runde...</span>}>
 				<div class="flex items-center gap-4 rounded border bg-muted px-4 py-2">
-					<IconQuestionMark class="h-8 w-8 shrink-0" />
+					<IconQuestionMark class="h-8 w-8 shrink-0 text-primary" />
 
 					<div class="flex flex-col justify-between">
 						<span class="font-bold">Frage:</span>
@@ -90,6 +90,8 @@ export default function Game() {
 					correctAnswer={() => currentRound()!.correctAnswer}
 				/>
 			</Show>
+
+			<hr class="border-t" />
 
 			<NewRound
 				game={game()!}

@@ -63,15 +63,19 @@ export function LetteredAnswers({
 	});
 
 	return (
-		<For each={letteredAnswers()}>
-			{(answer) => (
-				<div class="flex flex-col" style={`view-transition-name: answer-${answer.id}`}>
-					<span class="font-bold" class:text-green-600={answer.isCorrect}>
-						[{answer.letter}] {answer.player}
-					</span>
-					<pre class="overflow-x-auto rounded bg-muted px-4 py-2">{answer.text}</pre>
-				</div>
-			)}
-		</For>
+		<div class="flex flex-col gap-4">
+			<For each={letteredAnswers()}>
+				{(answer) => (
+					<div class="flex flex-col gap-2" style={`view-transition-name: answer-${answer.id}`}>
+						<span class="font-bold" class:text-green-600={answer.isCorrect}>
+							[{answer.letter}] {answer.player}
+						</span>
+						<pre class="overflow-x-auto rounded bg-muted px-4 py-2 whitespace-pre-wrap">
+							{answer.text}
+						</pre>
+					</div>
+				)}
+			</For>
+		</div>
 	);
 }
