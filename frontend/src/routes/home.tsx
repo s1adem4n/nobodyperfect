@@ -1,9 +1,10 @@
+import { useNavigate } from '@solidjs/router';
+import { createSignal } from 'solid-js';
+
 import { Button } from '@/lib/components/ui/button';
 import { ButtonLink } from '@/lib/components/ui/button-link';
 import { Input } from '@/lib/components/ui/input';
 import { pb } from '@/lib/pb';
-import { useNavigate } from '@solidjs/router';
-import { createSignal } from 'solid-js';
 
 export default function Home() {
 	const navigate = useNavigate();

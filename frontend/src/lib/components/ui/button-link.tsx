@@ -1,7 +1,7 @@
-import { type VariantProps } from 'class-variance-authority';
-import { splitProps, type ComponentProps } from 'solid-js';
 import { buttonVariants } from './button';
 import { A } from '@solidjs/router';
+import { type VariantProps } from 'class-variance-authority';
+import { splitProps, type ComponentProps } from 'solid-js';
 
 export type ButtonLinkProps = ComponentProps<typeof A> & VariantProps<typeof buttonVariants>;
 

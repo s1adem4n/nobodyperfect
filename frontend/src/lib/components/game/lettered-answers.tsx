@@ -1,5 +1,6 @@
-import type { Answer } from '@/lib/pb';
 import { createMemo, For } from 'solid-js';
+
+import type { Answer } from '@/lib/pb';
 
 interface LetteredAnswer {
 	letter: string;

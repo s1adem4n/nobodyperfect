@@ -1,7 +1,8 @@
-import { pb, type Game, type Round } from '@/lib/pb';
-import { Textarea } from '@/lib/components/ui/textarea';
-import { Button } from '@/lib/components/ui/button';
 import { createSignal } from 'solid-js';
+
+import { Button } from '@/lib/components/ui/button';
+import { Textarea } from '@/lib/components/ui/textarea';
+import { pb, type Game, type Round } from '@/lib/pb';
 
 export function NewRound({ game, onCreate }: { game: Game; onCreate: (round: Round) => void }) {
 	const [status, setStatus] = createSignal<'idle' | 'loading'>('idle');

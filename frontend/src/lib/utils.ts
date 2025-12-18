@@ -1,6 +1,7 @@
 import clsx, { type ClassValue } from 'clsx';
-import { createEffect, createResource, onCleanup } from 'solid-js';
 import type { RecordService } from 'pocketbase';
+import { createEffect, createResource, onCleanup } from 'solid-js';
+
 import type { Base } from '@/lib/pb';
 
 export function cn(...inputs: ClassValue[]) {

@@ -1,13 +1,14 @@
-import IconQuestionMark from '~icons/mdi/question-mark';
-import { pb } from '@/lib/pb';
-import { useSubscribe } from '@/lib/utils';
 import { useNavigate, useSearchParams } from '@solidjs/router';
 import { createResource, Show } from 'solid-js';
 import { renderSVG } from 'uqr';
-import { NewRound } from '@/lib/components/game/new-round';
-import { ModeratorAnswer } from '@/lib/components/game/moderator-answer';
-import { PlayerAnswer } from '@/lib/components/game/player-answer';
+import IconQuestionMark from '~icons/mdi/question-mark';
+
 import { LetteredAnswers } from '@/lib/components/game/lettered-answers';
+import { ModeratorAnswer } from '@/lib/components/game/moderator-answer';
+import { NewRound } from '@/lib/components/game/new-round';
+import { PlayerAnswer } from '@/lib/components/game/player-answer';
+import { pb } from '@/lib/pb';
+import { useSubscribe } from '@/lib/utils';
 
 export default function Game() {
 	const navigate = useNavigate();

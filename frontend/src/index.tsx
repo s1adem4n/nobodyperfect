@@ -1,8 +1,7 @@
 /* @refresh reload */
-import { render } from 'solid-js/web';
 import { Route, Router } from '@solidjs/router';
-
 import { lazy } from 'solid-js';
+import { render } from 'solid-js/web';
 
 const root = document.getElementById('root');
 

@@ -1,6 +1,7 @@
-import { cn } from '@/lib/utils';
 import { splitProps } from 'solid-js';
 import type { JSX } from 'solid-js/h/jsx-runtime';
+
+import { cn } from '@/lib/utils';
 
 export type InputProps = JSX.InputHTMLAttributes<HTMLInputElement>;
 

@@ -1,7 +1,8 @@
-import { pb, type Round } from '@/lib/pb';
-import { createEffect, createSignal, Show } from 'solid-js';
-import { Textarea } from '../ui/textarea';
 import { Button } from '../ui/button';
+import { Textarea } from '../ui/textarea';
+import { createEffect, createSignal, Show } from 'solid-js';
+
+import { pb, type Round } from '@/lib/pb';
 
 export function PlayerAnswer({ round }: { round: () => Round }) {
 	const [status, setStatus] = createSignal<'idle' | 'loading'>('idle');
