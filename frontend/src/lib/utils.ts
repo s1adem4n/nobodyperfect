@@ -3,7 +3,8 @@ import type { RecordService } from 'pocketbase';
 import { createEffect, createResource, onCleanup } from 'solid-js';
 
 import type { Base } from '@/lib/pb';
-import { generate } from 'lean-qr';
+import { generate } from 'lean-qr/nano';
+import { toSvgSource } from 'lean-qr/extras/svg';
 
 export function cn(...inputs: ClassValue[]) {
 	return clsx(inputs);
@@ -76,8 +77,9 @@ export function useSubscribe<T extends Base>({
 }
 
 export function generateQrCode(s: string) {
-	return generate(s, {}).toDataURL({
-		scale: 4,
+	return toSvgSource(generate(s), {
+		height: null,
+		width: null,
 		pad: 0
 	});
 }

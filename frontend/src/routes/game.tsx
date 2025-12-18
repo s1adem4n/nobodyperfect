@@ -61,9 +61,10 @@ export default function Game() {
 					</Show>
 				</div>
 
-				<a class="h-16 w-16 overflow-hidden rounded-sm dark:invert" href={qrCode()}>
-					<img class="h-full w-full" src={qrCode()} />
-				</a>
+				<button
+					class="h-16 w-16 overflow-hidden rounded-sm dark:invert"
+					innerHTML={qrCode()}
+				></button>
 			</div>
 
 			<hr class="border-t" />
