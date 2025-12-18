@@ -29,9 +29,6 @@
 	--primary: var(--color-sky-500);
 	--primary-foreground: var(--color-white);
 
-	--secondary: var(--color-zinc-50);
-	--secondary-foreground: var(--color-zinc-800);
-
 	--muted: var(--color-zinc-100);
 	--muted-foreground: var(--color-zinc-500);
 
@@ -46,13 +43,10 @@
 		--primary: var(--color-sky-400);
 		--primary-foreground: var(--color-zinc-950);
 
-		--secondary: var(--color-zinc-900);
-		--secondary-foreground: var(--color-zinc-100);
-
-		--muted: var(--color-zinc-800);
+		--muted: var(--color-zinc-900);
 		--muted-foreground: var(--color-zinc-400);
 
-		--border: var(--color-zinc-700);
+		--border: var(--color-zinc-800);
 	}
 }
 

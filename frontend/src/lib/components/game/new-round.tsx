@@ -26,7 +26,7 @@ export function NewRound({ game, onCreate }: { game: Game; onCreate: (round: Rou
 	}
 
 	return (
-		<details class="rounded border bg-secondary px-4 text-secondary-foreground">
+		<details class="rounded border bg-muted px-4">
 			<summary class="my-2 cursor-pointer font-bold">Neue Runde erstellen</summary>
 
 			<form class="mt-2 mb-4 flex flex-col gap-4" onsubmit={handleSubmit}>

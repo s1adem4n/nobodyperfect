@@ -1,10 +1,10 @@
 import clsx, { type ClassValue } from 'clsx';
+import { toSvgSource } from 'lean-qr/extras/svg';
+import { generate } from 'lean-qr/nano';
 import type { RecordService } from 'pocketbase';
 import { createEffect, createResource, onCleanup } from 'solid-js';
 
 import type { Base } from '@/lib/pb';
-import { generate } from 'lean-qr/nano';
-import { toSvgSource } from 'lean-qr/extras/svg';
 
 export function cn(...inputs: ClassValue[]) {
 	return clsx(inputs);
@@ -47,27 +47,28 @@ export function useSubscribe<T extends Base>({
 		if (items() === undefined) return;
 
 		const unsubscribe = service.subscribe('*', (e) => {
-			console.log(e);
-			switch (e.action) {
-				case 'create':
-					mutate((prev) => {
-						const next = [...(prev ?? []), e.record];
-						return transform ? transform(next) : next;
-					});
-					break;
-				case 'update':
-					mutate((prev) => {
-						const next = (prev || []).map((r) => (r.id === e.record.id ? e.record : r));
-						return transform ? transform(next) : next;
-					});
-					break;
-				case 'delete':
-					mutate((prev) => {
-						const next = (prev || []).filter((r) => r.id !== e.record.id);
-						return transform ? transform(next) : next;
-					});
-					break;
-			}
+			transition(() => {
+				switch (e.action) {
+					case 'create':
+						mutate((prev) => {
+							const next = [...(prev ?? []), e.record];
+							return transform ? transform(next) : next;
+						});
+						break;
+					case 'update':
+						mutate((prev) => {
+							const next = (prev || []).map((r) => (r.id === e.record.id ? e.record : r));
+							return transform ? transform(next) : next;
+						});
+						break;
+					case 'delete':
+						mutate((prev) => {
+							const next = (prev || []).filter((r) => r.id !== e.record.id);
+							return transform ? transform(next) : next;
+						});
+						break;
+				}
+			});
 		});
 
 		onCleanup(async () => (await unsubscribe)());
@@ -78,8 +79,10 @@ export function useSubscribe<T extends Base>({
 
 export function generateQrCode(s: string) {
 	return toSvgSource(generate(s), {
-		height: null,
-		width: null,
+		//@ts-ignore
+		height: '100%',
+		//@ts-ignore
+		width: '100%',
 		pad: 0
 	});
 }

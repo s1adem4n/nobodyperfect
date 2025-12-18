@@ -26,7 +26,7 @@ export function ModeratorAnswer({ round }: { round: Round }) {
 	}
 
 	return (
-		<details class="rounded border px-4">
+		<details class="rounded border bg-muted px-4">
 			<summary class="my-2 cursor-pointer font-bold">Antwort manuell eingeben</summary>
 
 			<form class="mt-2 mb-4 flex flex-col gap-4" onsubmit={handleSubmit}>

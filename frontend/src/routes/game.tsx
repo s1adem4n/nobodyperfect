@@ -17,7 +17,7 @@ export default function Game() {
 		(Array.isArray(searchParams.code) ? searchParams.code[0] : searchParams.code) || '';
 
 	if (!localStorage.getItem('name')) {
-		navigate(`/join-game?code=${code}`);
+		navigate(`/join-game?code=${code()}`);
 	}
 
 	const [game] = createResource(code, async (code) => {

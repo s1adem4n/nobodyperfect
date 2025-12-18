@@ -3,6 +3,7 @@ import { Textarea } from '../ui/textarea';
 import { createEffect, createSignal, Show } from 'solid-js';
 
 import { pb, type Round } from '@/lib/pb';
+import { transition } from '@/lib/utils';
 
 export function PlayerAnswer({ round }: { round: () => Round }) {
 	const [status, setStatus] = createSignal<'idle' | 'loading'>('idle');
@@ -28,10 +29,12 @@ export function PlayerAnswer({ round }: { round: () => Round }) {
 		});
 
 		localStorage.setItem(`answered-${round().id}`, 'true');
-		setSubmitted(true);
 
-		setStatus('idle');
-		setAnswer('');
+		transition(() => {
+			setSubmitted(true);
+			setStatus('idle');
+			setAnswer('');
+		});
 	}
 
 	return (

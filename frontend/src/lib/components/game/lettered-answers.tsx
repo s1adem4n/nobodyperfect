@@ -3,6 +3,7 @@ import { createMemo, For } from 'solid-js';
 import type { Answer } from '@/lib/pb';
 
 interface LetteredAnswer {
+	id: string;
 	letter: string;
 	player: string;
 	text: string;
@@ -42,12 +43,14 @@ export function LetteredAnswers({
 		// Create lettered answers array including correct answer
 		const allAnswers: LetteredAnswer[] = [
 			...answers().map((answer) => ({
+				id: answer.id,
 				letter: letterAssignments.get(answer.id) || '',
 				player: answer.player,
 				text: answer.text,
 				isCorrect: false
 			})),
 			{
+				id: 'correct',
 				letter: correctAnswerLetter,
 				player: 'Korrekte Antwort',
 				text: correctAnswer(),
@@ -62,7 +65,7 @@ export function LetteredAnswers({
 	return (
 		<For each={letteredAnswers()}>
 			{(answer) => (
-				<div class="flex flex-col">
+				<div class="flex flex-col" style={`view-transition-name: answer-${answer.id}`}>
 					<span class="font-bold" class:text-green-600={answer.isCorrect}>
 						[{answer.letter}] {answer.player}
 					</span>
