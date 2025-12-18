@@ -12,19 +12,25 @@ export default function Home() {
 	const [loading, setLoading] = createSignal(false);
 
 	return (
-		<div class="flex flex-1 flex-col items-center justify-center gap-4">
+		<div class="flex flex-1 flex-col justify-center gap-4">
 			<img src="/logo.png" alt="Logo" class="h-auto w-full" />
 
-			<Input
-				placeholder="Dein Name"
-				value={name()}
-				oninput={(e) => {
-					setName(e.target.value);
-					localStorage.setItem('name', e.target.value);
-				}}
-			/>
+			<div class="flex flex-col gap-2">
+				<label for="name" class="font-semibold">
+					Name
+				</label>
+				<Input
+					id="name"
+					placeholder="Gib deinen Namen ein"
+					value={name()}
+					oninput={(e) => {
+						setName(e.target.value);
+						localStorage.setItem('name', e.target.value);
+					}}
+				/>
+			</div>
 
-			<div class="flex w-full flex-col gap-4 sm:flex-row">
+			<div class="flex flex-col gap-4 sm:flex-row">
 				<Button
 					onclick={() => {
 						setLoading(true);

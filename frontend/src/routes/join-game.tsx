@@ -22,24 +22,34 @@ export default function JoinGame() {
 	}
 
 	return (
-		<form class="flex flex-1 flex-col items-center justify-center gap-4" onsubmit={handleSubmit}>
+		<form class="flex flex-1 flex-col justify-center gap-4" onsubmit={handleSubmit}>
 			<img src="/logo.png" alt="Logo" class="h-auto w-full" />
 
 			<Show when={localStorage.getItem('name') === null}>
-				<Input
-					placeholder="Dein Name"
-					value={name()}
-					oninput={(e) => {
-						setName(e.target.value);
-						localStorage.setItem('name', e.target.value);
-					}}
-					required
-				/>
+				<div class="flex flex-col gap-2">
+					<label for="name" class="font-semibold">
+						Name
+					</label>
+					<Input
+						id="name"
+						placeholder="Gib deinen Namen ein"
+						value={name()}
+						oninput={(e) => {
+							setName(e.target.value);
+							localStorage.setItem('name', e.target.value);
+						}}
+						required
+					/>
+				</div>
 			</Show>
 
-			<div class="flex w-full flex-col gap-2">
+			<div class="flex flex-col gap-2">
+				<label for="code" class="font-semibold">
+					Spielcode
+				</label>
 				<Input
-					placeholder="Spielcode"
+					id="code"
+					placeholder="XXXXXX"
 					value={code()}
 					oninput={(e) => setCode(e.target.value)}
 					required
