@@ -1,6 +1,5 @@
 import { useNavigate, useSearchParams } from '@solidjs/router';
 import { createResource, Show } from 'solid-js';
-import { renderSVG } from 'uqr';
 import IconQuestionMark from '~icons/mdi/question-mark';
 
 import { LetteredAnswers } from '@/lib/components/game/lettered-answers';
@@ -8,7 +7,7 @@ import { ModeratorAnswer } from '@/lib/components/game/moderator-answer';
 import { NewRound } from '@/lib/components/game/new-round';
 import { PlayerAnswer } from '@/lib/components/game/player-answer';
 import { pb } from '@/lib/pb';
-import { useSubscribe } from '@/lib/utils';
+import { generateQrCode, useSubscribe } from '@/lib/utils';
 
 export default function Game() {
 	const navigate = useNavigate();
@@ -41,7 +40,7 @@ export default function Game() {
 		transform: (v) => v.filter((a) => a.round === currentRound()?.id)
 	});
 
-	const qrCode = () => renderSVG(`${window.location.origin}/join-game?code=${code()}`);
+	const qrCode = () => generateQrCode(`${window.location.origin}/join-game?code=${code()}`);
 
 	const [isModerator, { mutate: setIsModerator }] = createResource(currentRound, async (round) => {
 		if (!round) return false;
@@ -62,10 +61,9 @@ export default function Game() {
 					</Show>
 				</div>
 
-				<button
-					class="h-16 w-16 overflow-hidden rounded-sm dark:invert"
-					innerHTML={qrCode()}
-				></button>
+				<a class="h-16 w-16 overflow-hidden rounded-sm dark:invert" href={qrCode()}>
+					<img class="h-full w-full" src={qrCode()} />
+				</a>
 			</div>
 
 			<hr class="border-t" />

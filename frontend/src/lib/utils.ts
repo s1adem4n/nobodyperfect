@@ -3,6 +3,7 @@ import type { RecordService } from 'pocketbase';
 import { createEffect, createResource, onCleanup } from 'solid-js';
 
 import type { Base } from '@/lib/pb';
+import { generate } from 'lean-qr';
 
 export function cn(...inputs: ClassValue[]) {
 	return clsx(inputs);
@@ -72,4 +73,11 @@ export function useSubscribe<T extends Base>({
 	});
 
 	return items;
+}
+
+export function generateQrCode(s: string) {
+	return generate(s, {}).toDataURL({
+		scale: 4,
+		pad: 0
+	});
 }
