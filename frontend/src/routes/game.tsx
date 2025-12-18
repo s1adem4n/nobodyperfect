@@ -1,7 +1,7 @@
 import IconQuestionMark from '~icons/mdi/question-mark';
 import { pb } from '@/lib/pb';
 import { useSubscribe } from '@/lib/utils';
-import { useSearchParams } from '@solidjs/router';
+import { useNavigate, useSearchParams } from '@solidjs/router';
 import { createResource, Show } from 'solid-js';
 import { renderSVG } from 'uqr';
 import { NewRound } from '@/lib/components/game/new-round';
@@ -9,10 +9,16 @@ import { ModeratorAnswer } from '@/lib/components/game/moderator-answer';
 import { PlayerAnswer } from '@/lib/components/game/player-answer';
 import { LetteredAnswers } from '@/lib/components/game/lettered-answers';
 
-export function Game() {
+export default function Game() {
+	const navigate = useNavigate();
+
 	const [searchParams] = useSearchParams();
 	const code = () =>
 		(Array.isArray(searchParams.code) ? searchParams.code[0] : searchParams.code) || '';
+
+	if (!localStorage.getItem('name')) {
+		navigate(`/join-game?code=${code}`);
+	}
 
 	const [game] = createResource(code, async (code) => {
 		return await pb.collection('games').getFirstListItem(pb.filter('code = {:code}', { code }));
@@ -55,7 +61,10 @@ export function Game() {
 					</Show>
 				</div>
 
-				<button class="h-16 w-16 overflow-hidden rounded-sm" innerHTML={qrCode()}></button>
+				<button
+					class="h-16 w-16 overflow-hidden rounded-sm dark:invert"
+					innerHTML={qrCode()}
+				></button>
 			</div>
 
 			<hr class="border-t" />

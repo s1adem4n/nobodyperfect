@@ -15,11 +15,12 @@ export function ModeratorAnswer({ round }: { round: Round }) {
 
 		await pb.collection('answers').create({
 			round: round.id,
-			text: answer(),
-			player: name()
+			player: name(),
+			text: answer()
 		});
 
 		setStatus('idle');
+		setName('');
 		setAnswer('');
 	}
 
@@ -28,7 +29,7 @@ export function ModeratorAnswer({ round }: { round: Round }) {
 			<summary class="my-2 cursor-pointer font-bold">Antwort manuell eingeben</summary>
 
 			<form class="mt-2 mb-4 flex flex-col gap-4" onsubmit={handleSubmit}>
-				<div class="flex flex-col">
+				<div class="flex flex-col gap-1">
 					<label for="name" class="font-semibold">
 						Name des Spielers
 					</label>
@@ -40,7 +41,7 @@ export function ModeratorAnswer({ round }: { round: Round }) {
 					/>
 				</div>
 
-				<div class="flex flex-col">
+				<div class="flex flex-col gap-1">
 					<label for="answer" class="font-semibold">
 						Antwort
 					</label>
@@ -49,7 +50,6 @@ export function ModeratorAnswer({ round }: { round: Round }) {
 						placeholder="Antwort"
 						value={answer()}
 						oninput={(e) => setAnswer(e.currentTarget.value)}
-						disabled={status() === 'loading'}
 					/>
 				</div>
 

@@ -7,6 +7,7 @@ export function PlayerAnswer({ round }: { round: () => Round }) {
 	const [status, setStatus] = createSignal<'idle' | 'loading'>('idle');
 	const [answer, setAnswer] = createSignal('');
 	const [submitted, setSubmitted] = createSignal(false);
+
 	createEffect(() => {
 		if (localStorage.getItem(`answered-${round().id}`) === 'true') {
 			setSubmitted(true);
@@ -35,7 +36,7 @@ export function PlayerAnswer({ round }: { round: () => Round }) {
 	return (
 		<Show when={!submitted()} fallback={<span>Antwort eingereicht!</span>}>
 			<form class="flex flex-col gap-4" onsubmit={handleSubmit}>
-				<div class="flex flex-col">
+				<div class="flex flex-col gap-1">
 					<label for="answer" class="font-semibold">
 						Deine Antwort
 					</label>

@@ -18,6 +18,9 @@
   },
   "devDependencies": {
     "@fontsource-variable/montserrat": "^5.2.8",
+    "@fontsource-variable/nunito": "^5.2.7",
+    "@fontsource-variable/quicksand": "^5.2.10",
+    "@fontsource-variable/rubik": "^5.2.8",
     "@iconify-json/lucide": "^1.2.81",
     "@iconify-json/mdi": "^1.2.3",
     "@tailwindcss/vite": "^4.1.18",

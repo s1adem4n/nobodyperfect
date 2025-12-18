@@ -3,7 +3,7 @@ import { Input } from '@/lib/components/ui/input';
 import { useNavigate } from '@solidjs/router';
 import { createSignal, Show } from 'solid-js';
 
-export function JoinGame() {
+export default function JoinGame() {
 	const navigate = useNavigate();
 	const [status, setStatus] = createSignal<'idle' | 'loading'>('idle');
 	const [name, setName] = createSignal(localStorage.getItem('name') || '');

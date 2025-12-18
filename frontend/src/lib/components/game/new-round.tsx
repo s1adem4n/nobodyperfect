@@ -25,11 +25,11 @@ export function NewRound({ game, onCreate }: { game: Game; onCreate: (round: Rou
 	}
 
 	return (
-		<details class="rounded border px-4">
+		<details class="rounded border bg-secondary px-4 text-secondary-foreground">
 			<summary class="my-2 cursor-pointer font-bold">Neue Runde erstellen</summary>
 
 			<form class="mt-2 mb-4 flex flex-col gap-4" onsubmit={handleSubmit}>
-				<div class="flex flex-col">
+				<div class="flex flex-col gap-1">
 					<label for="question" class="font-semibold">
 						Frage
 					</label>
@@ -41,7 +41,7 @@ export function NewRound({ game, onCreate }: { game: Game; onCreate: (round: Rou
 					/>
 				</div>
 
-				<div class="flex flex-col">
+				<div class="flex flex-col gap-1">
 					<label for="answer" class="font-semibold">
 						Richtige Antwort
 					</label>

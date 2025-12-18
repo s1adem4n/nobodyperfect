@@ -5,7 +5,7 @@ import { pb } from '@/lib/pb';
 import { useNavigate } from '@solidjs/router';
 import { createSignal } from 'solid-js';
 
-export function Home() {
+export default function Home() {
 	const navigate = useNavigate();
 
 	const [name, setName] = createSignal(localStorage.getItem('name') || '');

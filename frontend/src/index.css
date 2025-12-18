@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@import '@fontsource-variable/montserrat';
+@import '@fontsource-variable/nunito';
 
 @layer base {
 	html {
@@ -24,27 +24,35 @@
 
 :root {
 	--background: var(--color-white);
-	--foreground: var(--color-zinc-950);
-	--primary: var(--color-zinc-950);
+	--foreground: var(--color-zinc-800);
+
+	--primary: var(--color-sky-500);
 	--primary-foreground: var(--color-white);
-	--secondary: var(--color-zinc-200);
-	--secondary-foreground: var(--color-zinc-950);
-	--muted: var(--color-zinc-50);
+
+	--secondary: var(--color-zinc-50);
+	--secondary-foreground: var(--color-zinc-800);
+
+	--muted: var(--color-zinc-100);
 	--muted-foreground: var(--color-zinc-500);
+
 	--border: var(--color-zinc-200);
 }
 
 @media (prefers-color-scheme: dark) {
 	:root {
 		--background: var(--color-zinc-950);
-		--foreground: var(--color-zinc-50);
-		--primary: var(--color-zinc-50);
+		--foreground: var(--color-zinc-100);
+
+		--primary: var(--color-sky-400);
 		--primary-foreground: var(--color-zinc-950);
-		--secondary: var(--color-zinc-800);
-		--secondary-foreground: var(--color-zinc-50);
-		--muted: var(--color-zinc-900);
+
+		--secondary: var(--color-zinc-900);
+		--secondary-foreground: var(--color-zinc-100);
+
+		--muted: var(--color-zinc-800);
 		--muted-foreground: var(--color-zinc-400);
-		--border: var(--color-zinc-800);
+
+		--border: var(--color-zinc-700);
 	}
 }
 
@@ -61,6 +69,6 @@
 }
 
 @theme {
-	--font-sans: 'Montserrat Variable';
-	--radius: 0.5rem;
+	--font-sans: 'Nunito Variable';
+	--radius: 1rem;
 }
