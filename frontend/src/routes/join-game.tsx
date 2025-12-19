@@ -25,7 +25,7 @@ export default function JoinGame() {
 
 	return (
 		<form class="flex flex-1 flex-col justify-center gap-4" onsubmit={handleSubmit}>
-			<img src={logo} alt="Logo" class="h-auto w-full" />
+			<img src={logo} alt="Logo" class="h-auto w-full text-transparent" width="1078" height="498" />
 
 			<Show when={localStorage.getItem('name') === null}>
 				<div class="flex flex-col gap-2">

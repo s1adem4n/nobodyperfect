@@ -15,7 +15,7 @@ export default function Home() {
 
 	return (
 		<div class="flex flex-1 flex-col justify-center gap-4">
-			<img src={logo} alt="Logo" class="h-auto w-full" />
+			<img src={logo} alt="Logo" class="h-auto w-full text-transparent" width="1078" height="498" />
 
 			<div class="flex flex-col gap-2">
 				<label for="name" class="font-semibold">
