@@ -3,7 +3,6 @@ import { createSignal } from 'solid-js';
 
 import { Logo } from '@/lib/components/logo';
 import { Button } from '@/lib/components/ui/button';
-import { ButtonLink } from '@/lib/components/ui/button-link';
 import { Input } from '@/lib/components/ui/input';
 import { pb } from '@/lib/pb';
 
@@ -13,8 +12,26 @@ export default function Home() {
 	const [name, setName] = createSignal(localStorage.getItem('name') || '');
 	const [loading, setLoading] = createSignal(false);
 
+	async function handleSubmit(e: SubmitEvent) {
+		e.preventDefault();
+		const submitter = e.submitter as HTMLButtonElement;
+
+		if (submitter?.id === 'create-button') {
+			setLoading(true);
+			try {
+				const game = await pb.collection('games').create();
+				navigate(`/game?code=${game.code}`);
+			} catch (err) {
+				console.error(err);
+				setLoading(false);
+			}
+		} else {
+			navigate('/join-game');
+		}
+	}
+
 	return (
-		<div class="flex flex-1 flex-col justify-center gap-4">
+		<form class="flex flex-1 flex-col justify-center gap-4" onsubmit={handleSubmit}>
 			<Logo />
 
 			<div class="flex flex-col gap-2">
@@ -29,35 +46,19 @@ export default function Home() {
 						setName(e.target.value);
 						localStorage.setItem('name', e.target.value);
 					}}
+					required
 				/>
 			</div>
 
 			<div class="flex flex-col gap-4 sm:flex-row">
-				<Button
-					onclick={() => {
-						setLoading(true);
-						pb.collection('games')
-							.create()
-							.then((game) => {
-								navigate(`/game?code=${game.code}`);
-							});
-					}}
-					classList={{
-						'pointer-events-none opacity-70': !name() || loading()
-					}}
-				>
+				<Button id="create-button" type="submit" disabled={loading()}>
 					Neues Spiel erstellen
 				</Button>
 
-				<ButtonLink
-					href="/join-game"
-					classList={{
-						'pointer-events-none opacity-70': !name() || loading()
-					}}
-				>
+				<Button id="join-button" type="submit" disabled={loading()}>
 					Einem Spiel beitreten
-				</ButtonLink>
+				</Button>
 			</div>
-		</div>
+		</form>
 	);
 }

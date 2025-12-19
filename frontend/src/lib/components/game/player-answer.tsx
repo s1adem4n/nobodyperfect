@@ -47,8 +47,9 @@ export function PlayerAnswer({ round }: { round: () => Round }) {
 					<Textarea
 						id="answer"
 						value={answer()}
-						onInput={(e) => setAnswer(e.currentTarget.value)}
+						oninput={(e) => setAnswer(e.currentTarget.value)}
 						disabled={status() === 'loading'}
+						required
 					/>
 				</div>
 

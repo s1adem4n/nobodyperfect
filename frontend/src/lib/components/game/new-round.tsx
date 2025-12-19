@@ -39,6 +39,7 @@ export function NewRound({ game, onCreate }: { game: Game; onCreate: (round: Rou
 						onInput={(e) => setQuestion(e.currentTarget.value)}
 						id="question"
 						placeholder="Gib hier die Frage für die neue Runde ein"
+						required
 					/>
 				</div>
 
@@ -51,13 +52,11 @@ export function NewRound({ game, onCreate }: { game: Game; onCreate: (round: Rou
 						onInput={(e) => setAnswer(e.currentTarget.value)}
 						id="answer"
 						placeholder="Gib hier die richtige Antwort ein"
+						required
 					/>
 				</div>
 
-				<Button
-					type="submit"
-					disabled={status() === 'loading' || !question().trim() || !answer().trim()}
-				>
+				<Button type="submit" disabled={status() === 'loading'}>
 					Runde erstellen
 				</Button>
 			</form>

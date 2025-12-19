@@ -39,6 +39,7 @@ export function ModeratorAnswer({ round }: { round: Round }) {
 						placeholder="Name"
 						value={name()}
 						oninput={(e) => setName(e.target.value)}
+						required
 					/>
 				</div>
 
@@ -51,6 +52,7 @@ export function ModeratorAnswer({ round }: { round: Round }) {
 						placeholder="Antwort"
 						value={answer()}
 						oninput={(e) => setAnswer(e.currentTarget.value)}
+						required
 					/>
 				</div>
 
