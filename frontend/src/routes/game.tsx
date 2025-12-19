@@ -7,7 +7,7 @@ import { ModeratorAnswer } from '@/lib/components/game/moderator-answer';
 import { NewRound } from '@/lib/components/game/new-round';
 import { PlayerAnswer } from '@/lib/components/game/player-answer';
 import { pb } from '@/lib/pb';
-import { generateQrCode, transition, useSubscribe } from '@/lib/utils';
+import { generateQrCode, useSubscribe } from '@/lib/utils';
 
 export default function Game() {
 	const navigate = useNavigate();
@@ -67,8 +67,7 @@ export default function Game() {
 						<button
 							class="overflow-hidden rounded-sm bg-white p-1"
 							innerHTML={qrCode()}
-							onClick={() => transition(() => setShowQr(true))}
-							style="view-transition-name: qr-code"
+							onClick={() => setShowQr(true)}
 						></button>
 					</Show>
 				</div>
@@ -77,11 +76,10 @@ export default function Game() {
 			<Show when={showQr()}>
 				<div
 					class="fixed inset-0 z-50 flex items-center justify-center bg-black"
-					onClick={() => transition(() => setShowQr(false))}
+					onClick={() => setShowQr(false)}
 				>
 					<div
 						class="h-[80vw] max-h-[80vh] w-[80vw] max-w-[80vh] rounded bg-white p-4"
-						style="view-transition-name: qr-code"
 						innerHTML={qrCode()}
 					/>
 				</div>
