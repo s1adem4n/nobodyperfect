@@ -23,7 +23,7 @@
 }
 
 :root {
-	--background: var(--color-50);
+	--background: var(--color-zinc-50);
 	--foreground: var(--color-zinc-800);
 
 	--primary: var(--color-sky-500);
