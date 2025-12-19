@@ -1,7 +1,7 @@
 import { useNavigate } from '@solidjs/router';
 import { createSignal, Show } from 'solid-js';
 
-import logo from '@/lib/assets/logo.png';
+import { Logo } from '@/lib/components/logo';
 import { Button } from '@/lib/components/ui/button';
 import { Input } from '@/lib/components/ui/input';
 
@@ -25,7 +25,7 @@ export default function JoinGame() {
 
 	return (
 		<form class="flex flex-1 flex-col justify-center gap-4" onsubmit={handleSubmit}>
-			<img src={logo} alt="Logo" class="h-auto w-full text-transparent" width="1078" height="498" />
+			<Logo />
 
 			<Show when={localStorage.getItem('name') === null}>
 				<div class="flex flex-col gap-2">

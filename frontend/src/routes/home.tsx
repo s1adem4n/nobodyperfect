@@ -1,7 +1,7 @@
 import { useNavigate } from '@solidjs/router';
 import { createSignal } from 'solid-js';
 
-import logo from '@/lib/assets/logo.png';
+import { Logo } from '@/lib/components/logo';
 import { Button } from '@/lib/components/ui/button';
 import { ButtonLink } from '@/lib/components/ui/button-link';
 import { Input } from '@/lib/components/ui/input';
@@ -15,7 +15,7 @@ export default function Home() {
 
 	return (
 		<div class="flex flex-1 flex-col justify-center gap-4">
-			<img src={logo} alt="Logo" class="h-auto w-full text-transparent" width="1078" height="498" />
+			<Logo />
 
 			<div class="flex flex-col gap-2">
 				<label for="name" class="font-semibold">
@@ -43,7 +43,7 @@ export default function Home() {
 							});
 					}}
 					classList={{
-						'pointer-events-none opacity-50': !name() || loading()
+						'pointer-events-none opacity-70': !name() || loading()
 					}}
 				>
 					Neues Spiel erstellen
@@ -52,7 +52,7 @@ export default function Home() {
 				<ButtonLink
 					href="/join-game"
 					classList={{
-						'pointer-events-none opacity-50': !name() || loading()
+						'pointer-events-none opacity-70': !name() || loading()
 					}}
 				>
 					Einem Spiel beitreten

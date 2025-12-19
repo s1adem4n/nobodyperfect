@@ -2,7 +2,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { splitProps, type JSX } from 'solid-js';
 
 export const buttonVariants = cva(
-	'inline-flex items-center rounded font-semibold uppercase disabled:cursor-not-allowed disabled:opacity-50 w-full transition-opacity',
+	'inline-flex items-center rounded font-semibold uppercase disabled:cursor-not-allowed disabled:opacity-70 w-full transition-opacity',
 	{
 		variants: {
 			variant: {
